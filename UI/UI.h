@@ -5,7 +5,13 @@
 #include <iostream>
 using namespace std;
 #include <fstream>
-#include "Event.h"
+
+#include "MarsStation.h"
+#include "FormulationEvent.h"
+#include "CancelEvent.h"
+#include "PromotionEvent.h"
+
+class MarsStation;
 
 class UI
 {
@@ -51,7 +57,10 @@ void UI::inputData()
 		input >> eventType;
 		if (eventType == 'F')
 		{
-
+			//add to event list
+			// F event list
+			FormulationEvent* e;
+			
 		}
 	}
 }
