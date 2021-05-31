@@ -156,15 +156,3 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue<T>& LQ)
 		NodePtr = NodePtr->getNext();
 	}
 }
-
-template<typename T>
-void LinkedQueue<T>::print() const
-{
-	Node<T>* ptr = frontPtr;
-	while (ptr)
-	{
-		cout << ptr->getItem() << " ";
-		ptr = ptr->getNext();
-	}
-	cout << endl;
-}
