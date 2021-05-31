@@ -18,9 +18,11 @@ class UI
 private:
 	ofstream output;
 	ifstream input;
+	int choice;
 public:
 	void inputData();
-	void outputSimulation();
+	void outputSimulationChoice();
+	void ConsoleOutput(); //outputs based on the choice of program interface
 };
 
 void UI::inputData()
@@ -65,7 +67,7 @@ void UI::inputData()
 	}
 }
 
-void UI::outputSimulation()
+void UI::outputSimulationChoice() //chooses the type of simulation from choice
 {
 	cout << "Choose Program interface(from 1 to 3 inclusive):" << endl;
 	cout << "1-Interactive Mode" << endl;
@@ -79,8 +81,10 @@ void UI::outputSimulation()
 		cout << "Enter again:";
 		cin >> choiceN;
 	}
-	if (choiceN == 1)
-	{
+	this->choice = choiceN;
+}
 
-	}
+void UI::ConsoleOutput() //needs day,mission list(s),rover list(s)
+{
+
 }
