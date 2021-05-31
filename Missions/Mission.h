@@ -3,7 +3,7 @@
 #include "../Data structure and algorithm/ArrayStack.h"
 #include "Rovers.h"
 
-template<typename T>
+
 class Mission
 {
 
@@ -14,10 +14,10 @@ private:
 	int leftDays; // the amount of days till the mission ends
 	// Equation of consumptionDays = 2*(TargetLocation*RoverSpeed)/25 +MD;
 	//
-	Rover R; //Rover assigned to the mission
+	Rovers* R; //Rover assigned to the mission
 
 public:
 	Mission();
-	void assigntoRover(Rover R);
+	void assigntoRover(Rovers* R);
 
 };
