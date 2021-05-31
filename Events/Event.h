@@ -7,7 +7,7 @@ protected:
 	int missionID; //mission Id
 public:
 	Event();
-	virtual void Execute() = 0;
+	virtual void Execute() = 0; //pure virtual
 	
 	virtual ~Event();
 };
