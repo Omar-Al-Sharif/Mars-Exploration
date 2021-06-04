@@ -1,6 +1,6 @@
 #include "Mission.h"
 
-Mission::Mission(int fd, int md, int targetloc, int significance,int Id)
+Mission::Mission(int fd, int md, int targetloc, int significance,int Id,char MT)
 {
 	FD = fd;
 	MD = md;
@@ -8,6 +8,7 @@ Mission::Mission(int fd, int md, int targetloc, int significance,int Id)
 	Significance = significance;
 	numberOfmissions++;
 	missionID = Id;
+	missionType = MT;
 }
 
 /////////////////////////////////////////////////////////////
@@ -52,4 +53,9 @@ int Mission::getWaitingDays() const
 int Mission::getExecutionDays() const
 {
 	return ED;
+}
+
+int Mission::getNumberOfmissions() const
+{
+	return numberOfmissions;
 }
