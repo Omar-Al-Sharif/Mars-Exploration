@@ -13,7 +13,6 @@ public:
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
-	void print() const;
 	~LinkedQueue();
 
 	//copy constructor
