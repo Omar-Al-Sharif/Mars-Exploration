@@ -1,13 +1,23 @@
 #pragma once
 //inputs are put in the event list
+#include "Mission.h"
 class Event
 {
 protected:
-	int day;//event day
+	int Eventday;//event day
 	int missionID; //mission Id
 public:
-	Event();
-	virtual void Execute() = 0; //pure virtual
+	Event(int m, int d)
+	{
+		missionID = m;
+		Eventday = d;
+	}
+	int getDay()
+	{
+		return Eventday;
+	}
+
+	virtual void Execute() = 0;
 	
 	virtual ~Event();
 };
