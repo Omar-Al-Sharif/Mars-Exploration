@@ -1,11 +1,12 @@
 #include "Mission.h"
 
-Mission::Mission(int fd, int md, int targetloc, int significance)
+Mission::Mission(int fd, int md, int targetloc, int significance,int Id)
 {
 	FD = fd;
 	MD = md;
 	targetlocation = targetloc;
 	Significance = significance;
+	missionID = Id;
 }
 
 void Mission::setWaitingDays(int wd)
