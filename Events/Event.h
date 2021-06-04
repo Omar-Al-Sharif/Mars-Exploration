@@ -1,6 +1,9 @@
 #pragma once
 //inputs are put in the event list
 #include "Mission.h"
+#include "Emission.h"
+#include "Pmissions.h"
+
 class Event
 {
 protected:
