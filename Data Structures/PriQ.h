@@ -54,10 +54,10 @@ private:
 		int Largest = Index;
 
 		if (LeftChild <= Count) //if left subtree exists
-			if (Data[LeftChild] > Data[Largest])
+			if (*(Data[LeftChild]) > *(Data[Largest]))
 				Largest = LeftChild;
-		if (RightChild <= Count) //if left subtree exists
-			if (Data[RightChild] > Data[Largest])
+		if (RightChild <= Count) //if right subtree exists
+			if (*(Data[RightChild]) > *(Data[Largest]))
 				Largest = RightChild;
 
 		if (Largest != Index)
