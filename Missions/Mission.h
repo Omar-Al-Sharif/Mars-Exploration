@@ -16,6 +16,9 @@ private:
 	int Significance;
 	// Equation of consumptionDays = 2*(TargetLocation*RoverSpeed)/25 +MD;
 	Rovers* R; //Rover assigned to the mission
+	
+	int missionID;
+	static int numberOfmissions;
 
 public:
 	Mission(int fd, int md, int targetloc, int significance);
