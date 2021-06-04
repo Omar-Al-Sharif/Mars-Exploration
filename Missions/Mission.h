@@ -13,11 +13,12 @@ private:
 	int targetlocation;
 	int WD; //Waiting Days before the mission is executed
 	int CD; //Completion day is the finish time
+	int Significance;
 	// Equation of consumptionDays = 2*(TargetLocation*RoverSpeed)/25 +MD;
 	Rovers* R; //Rover assigned to the mission
 
 public:
-	Mission(int fd, int md, int targetloc);
+	Mission(int fd, int md, int targetloc, int significance);
 	void assigntoRover(Rovers* R);
 	void setWaitingDays(int wd);
 	int getFinishDay() const;
