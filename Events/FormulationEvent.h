@@ -13,6 +13,6 @@ private:
 	char Mtype;
 public:
 	FormulationEvent(char m, int x, int y, float t, float f, int s);
-	void Execute();
+	Mission& Execute(int fd);
 	~FormulationEvent();
 };
