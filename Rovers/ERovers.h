@@ -13,5 +13,6 @@ private:
 public:
 	void setRoverMission(Mission a);
 	Mission* getRoverMission();
+	friend bool operator > (ERover& ER1, ERover& ER2);
 
 };
