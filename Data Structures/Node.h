@@ -4,7 +4,7 @@ template <typename T>
 class Node
 {
 private:
-	T* data; // T* item
+	T data; // T* item
 	Node* nextNode;
 public:
 	Node()
@@ -19,8 +19,12 @@ public:
 	{
 		return nextNode;
 	}
-	n getItem()  // get the item data in the node
+	T getItem()  // get the item data in the node
 	{
 		return data;
+	}
+	void setItem(T i)
+	{
+		data = i;
 	}
 };
