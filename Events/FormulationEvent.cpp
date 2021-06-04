@@ -7,7 +7,15 @@ FormulationEvent::FormulationEvent(char m, int d, int missionId, float Location,
 	sig = s;
 }
 Mission& FormulationEvent::Execute(int fd) {
-	Mission m (fd, missionDuration, Tlocation, sig, missionID, Mtype);
+	if (Mtype == 'E')
+	{
+		Emission m(fd, missionDuration, Tlocation, sig, missionID, Mtype);
+	}
+	else if (Mtype == 'P')
+	{
+		Pmission m(fd, missionDuration, Tlocation, sig, missionID, Mtype);
+	}
+	
 	return m;
 }
 FormulationEvent::~FormulationEvent() {
