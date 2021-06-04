@@ -6,8 +6,17 @@ Mission::Mission(int fd, int md, int targetloc, int significance,int Id)
 	MD = md;
 	targetlocation = targetloc;
 	Significance = significance;
+	numberOfmissions++;
 	missionID = Id;
 }
+
+/////////////////////////////////////////////////////////////
+
+int Mission::numberOfmissions = 0; // static data member initialization
+
+//////////////////////////////////////////////////////////
+
+
 
 void Mission::setWaitingDays(int wd)
 {
@@ -26,4 +35,21 @@ void Mission::assigntoRover(Rovers* R)
 int Mission::getFinishDay() const
 {
 	return CD;
+}
+
+int Mission::getFormulationDay() const
+{
+	return FD;
+}
+int Mission::getMissionId() const
+{
+	return missionID;
+}
+int Mission::getWaitingDays() const
+{
+	return WD;
+}
+int Mission::getExecutionDays() const
+{
+	return ED;
 }
