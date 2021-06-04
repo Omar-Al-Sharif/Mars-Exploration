@@ -25,4 +25,8 @@ public:
 	void assigntoRover(Rovers* R);
 	void setWaitingDays(int wd);
 	int getFinishDay() const;
+	int getFormulationDay() const;
+	int getMissionId() const;
+	int getWaitingDays() const;
+	int getExecutionDays() const;
 };
