@@ -6,8 +6,9 @@ FormulationEvent::FormulationEvent(char m, int d, int missionId, float Location,
 	missionDuration = f;
 	sig = s;
 }
-void FormulationEvent::Execute() {
-
+Mission& FormulationEvent::Execute(int fd) {
+	Mission m (fd, missionDuration, Tlocation, sig, missionID, Mtype);
+	return m;
 }
 FormulationEvent::~FormulationEvent() {
 
