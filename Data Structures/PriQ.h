@@ -47,6 +47,25 @@ private:
 		Data[i1]=temp;
 
 	}
+	
+	void HeapSort()
+	{
+		T Max;
+		T temp[20];
+		int tempSize = -1;
+		while (Count != -1)
+		{
+			Max = Data[0];
+			Data[0] = Data[Count--];
+			temp[++tempSize] = Max;
+			ReheapDown(0);
+		}
+		for (int i = 0; i <= tempSize; i++)
+		{
+			Data[i] = temp[i];
+			Count++;
+		}
+	}
 
 	void ReheapDown(int Index)
 	{
@@ -95,6 +114,7 @@ public:
 	{
 		Data[++Count] = Element;
 		ReheapUp(Count);
+		HeapSort();
 	}
 
 	bool dequeue(T& Element)
@@ -102,9 +122,9 @@ public:
 		if (!IsEmpty())
 		{
 			Element = Data[0];
-			Data[0] = Data[Count];
-			Count--;
+			Data[0] = Data[Count--];
 			ReheapDown(0);
+			HeapSort();
 			return true;
 		}
 		else
