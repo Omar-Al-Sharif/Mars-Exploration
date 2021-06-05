@@ -9,7 +9,13 @@ private:
 public:
 	Node()
 	{
-		nextItem = nullptr;
+		nextNode = nullptr;
+	}
+	Node( T newItem) 
+	{
+		data = newItem;
+		nextNode= nullptr;
+
 	}
 	void setNext(Node <T>* passedNode)  //set the next node in the list
 	{
