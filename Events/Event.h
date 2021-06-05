@@ -2,7 +2,7 @@
 //inputs are put in the event list
 #include "Mission.h"
 #include "Emission.h"
-#include "Pmissions.h"
+#include "PMission.h"
 
 class Event
 {
@@ -19,8 +19,8 @@ public:
 	{
 		return Eventday;
 	}
-
 	virtual void Execute() = 0;
-	
+	virtual Mission* Execute(int fd);
+
 	virtual ~Event();
 };
