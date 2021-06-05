@@ -1,3 +1,7 @@
+#pragma once
+#include "Queue.h"
+#include "Event.h"
+#include "UI.h"
 #include "Mission.h"
 #include "Rovers.h"
 #include"ERovers.h"
