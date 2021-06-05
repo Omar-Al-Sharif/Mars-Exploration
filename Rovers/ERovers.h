@@ -1,18 +1,19 @@
 #pragma once
 #include <iostream>
 #include "Rovers.h"
-#include"Mission.h"
+#include"Emission.h"
 
 
 class ERover : public Rovers
 {
 private:
-	Mission* Emission;
+	Mission* RoverMission;
 
 
 public:
+	ERover(int spd, int Checkupdur, int Ncheckup, int Mcomp, Mission* roverMission);
 	void setRoverMission(Mission a);
 	Mission* getRoverMission();
-	friend bool operator > (ERover& ER1, ERover& ER2);
+	bool isAssigned();
 
 };
