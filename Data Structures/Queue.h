@@ -1,4 +1,6 @@
 #pragma once
+
+#pragma once
 #include "Node.h"
 
 template <typename T>
@@ -13,6 +15,7 @@ public:
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
+	void print() const;
 	~LinkedQueue();
 
 	//copy constructor
@@ -22,7 +25,6 @@ public:
 /*
 Function: Queue()
 The constructor of the Queue class.
-
 */
 template <typename T>
 LinkedQueue<T>::LinkedQueue()
@@ -35,7 +37,6 @@ LinkedQueue<T>::LinkedQueue()
 /*
 Function: isEmpty
 Sees whether this queue is empty.
-
 Input: None.
 Output: True if the queue is empty; otherwise false.
 */
@@ -47,7 +48,6 @@ bool LinkedQueue<T>::isEmpty() const
 
 /*Function:enqueue
 Adds newEntry at the back of this queue.
-
 Input: newEntry .
 Output: True if the operation is successful; otherwise false.
 */
@@ -68,7 +68,6 @@ bool LinkedQueue<T>::enqueue(const T& newEntry)
 /*Function: dequeue
 Removes the front of this queue. That is, removes the item that was added
 earliest.
-
 Input: None.
 Output: True if the operation is successful; otherwise false.
 */
@@ -95,7 +94,6 @@ bool LinkedQueue<T>::dequeue(T& frntEntry)
 /*
 Function: peek
 copies the front of this queue to the passed param. The operation does not modify the queue.
-
 Input: None.
 Output: The front of the queue.
 */
@@ -127,7 +125,6 @@ LinkedQueue<T>::~LinkedQueue()
 Function: Copy constructor
 To avoid shallow copy,
 copy constructor is provided
-
 Input: LinkedQueue<T>: The Queue to be copied
 Output: none
 */
