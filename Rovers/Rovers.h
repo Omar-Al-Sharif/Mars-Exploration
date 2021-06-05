@@ -12,6 +12,7 @@ protected:
 	int  MissionComp; //number of missions completed by the rover, we need it to know it for checkup
 	
 public:
+	 Rovers(int spd, int Checkupdur, int Ncheckup, int Mcomp);
 	 void setSpeed(int a);
 	 void setCheckUpDur(int a);
 	 void setMissionComp(int a);
@@ -20,4 +21,5 @@ public:
 	 int getNeedCheckUp();
 	 int getCheckUpDur();
 	 int getSpeed();
+	 ~Rovers();
 };
