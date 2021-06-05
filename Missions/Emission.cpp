@@ -1,6 +1,19 @@
 #include "Emission.h"
-
-Emission::Emission(int fd, int md, int targetloc) : Mission(fd, md, targetloc)
+Emission::Emission()
 {
-	//Priority eqn to be added here
+
+}
+Emission::Emission(int fd, int md, int targetloc,int Id) : Mission(fd, md, targetloc,Id)
+{
+	setPriority();
+}
+
+void Emission::setPriority()
+{
+	//write the piroity equation  
+}
+
+int Emission::getPriority()
+{
+	return Priority;
 }
