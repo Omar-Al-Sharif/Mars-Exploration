@@ -7,9 +7,11 @@
 class PRover : public Rovers
 {
 private :
-	Mission* Pmission;
+	Mission* RoverMission;
 
 public :
+	PRover(int spd, int Checkupdur, int Ncheckup, int Mcomp, Mission* roverMission);
 	void setRoverMission(Mission a);
 	Mission* getRoverMission();
+	bool isAssigned();
 };
