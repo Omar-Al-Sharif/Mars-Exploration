@@ -1,7 +1,5 @@
 #pragma once
 #include "Event.h"
-#pragma once
-#include "Event.h"
 class FormulationEvent :public Event
 {
 private:
@@ -9,12 +7,15 @@ private:
 	int missionDuration; // number of days needed to fulfill the mission requirements at target location
 	int sig; // mission’s significance
 	char Mtype;
+	Emission* emission;
+	Pmission* pmission;
 public:
 	FormulationEvent(char m, int x, int y, int t, int f, int s);
 	//void Execute();
-	Mission* Execute(int fd);
-	Emission ExecuteEmg(int fd );
-	Pmission ExecutePol(int fd);
+	Emission* getEmission();
+	Pmission* getPmission();
+	void Execute(int fd);
+	char gettype();
 	~FormulationEvent();
-
+	
 };
