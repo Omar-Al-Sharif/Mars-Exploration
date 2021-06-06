@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Mission.h"
 class Pmission : public Mission
 {
 private:
