@@ -19,8 +19,11 @@ public:
 	{
 		return Eventday;
 	}
-	virtual void Execute() = 0;
-	virtual Mission* Execute(int fd);
+	
+     virtual void Execute(int fd)=0;
 
-	virtual ~Event();
+	 ~Event()
+	 {
+
+	 }
 };
