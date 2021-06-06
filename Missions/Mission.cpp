@@ -11,16 +11,16 @@ Mission::Mission(int fd, int md, int targetloc, int significance, int Id)
 	missionID = Id;
 	Assigned = false;
 }
-
-Mission::Mission(int fd, int md, int targetloc, int Id)
-{
-	FD = fd;
-	MD = md;
-	targetlocation = targetloc;
-	numberOfmissions++;
-	missionID = Id;
-	Assigned = false;
-}
+//
+//Mission::Mission(int fd, int md, int targetloc, int Id)
+//{
+//	FD = fd;
+//	MD = md;
+//	targetlocation = targetloc;
+//	numberOfmissions++;
+//	missionID = Id;
+//	Assigned = false;
+//}
 
 
 
@@ -46,7 +46,7 @@ bool Mission::getAssigned()
 
 void Mission::setWaitingDays()
 {
-	WD = EWD-SWD;
+	WD = EWD - SWD;
 }
 
 
