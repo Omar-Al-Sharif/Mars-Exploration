@@ -1,6 +1,4 @@
 #pragma once
-
-#pragma once
 #include "Node.h"
 
 template <typename T>
@@ -12,9 +10,9 @@ private:
 public:
 	LinkedQueue();
 	bool isEmpty() const;
-	bool enqueue(const T& newEntry);
-	bool dequeue(T& frntEntry);
-	bool peek(T& frntEntry)  const;
+	bool enqueue(T* newEntry);
+	bool dequeue(T* frntEntry);
+	bool peek(T* frntEntry)  const;
 	void print() const;
 	~LinkedQueue();
 
@@ -31,7 +29,6 @@ LinkedQueue<T>::LinkedQueue()
 {
 	backPtr = nullptr;
 	frontPtr = nullptr;
-
 }
 
 /*
@@ -52,7 +49,7 @@ Input: newEntry .
 Output: True if the operation is successful; otherwise false.
 */
 template <typename T>
-bool LinkedQueue<T>::enqueue(const T& newEntry)
+bool LinkedQueue<T>::enqueue(T* newEntry)
 {
 	Node<T>* newNodePtr = new Node<T>(newEntry);
 	// Insert the new node
@@ -72,7 +69,7 @@ Input: None.
 Output: True if the operation is successful; otherwise false.
 */
 template <typename T>
-bool LinkedQueue<T>::dequeue(T& frntEntry)
+bool LinkedQueue<T>::dequeue(T* frntEntry)
 {
 	if (isEmpty())
 		return false;
@@ -88,7 +85,6 @@ bool LinkedQueue<T>::dequeue(T& frntEntry)
 	delete nodeToDeletePtr;
 
 	return true;
-
 }
 
 /*
@@ -98,7 +94,7 @@ Input: None.
 Output: The front of the queue.
 */
 template <typename T>
-bool LinkedQueue<T>::peek(T& frntEntry) const
+bool LinkedQueue<T>::peek(T* frntEntry) const
 {
 	if (isEmpty())
 		return false;
@@ -115,8 +111,7 @@ removes all nodes from the queue by dequeuing them
 template <typename T>
 LinkedQueue<T>::~LinkedQueue()
 {
-	T temp;
-
+	T* temp;
 	//Free (Dequeue) all nodes in the queue
 	while (dequeue(temp));
 }
