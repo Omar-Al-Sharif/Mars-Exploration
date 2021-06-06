@@ -1,25 +1,50 @@
 #include "FormulationEvent.h"
+//
 FormulationEvent::FormulationEvent(char m, int d, int missionId, int Location, int f, int s) :Event(missionId, d)
 {
 	Mtype = m;
 	Tlocation = Location;
 	missionDuration = f;
 	sig = s;
+	emission = nullptr;
+	pmission = nullptr;
+
 }
 
-	Mission* FormulationEvent::Execute(int fd) 
+	void FormulationEvent::Execute(int fd) 
 	{
 		
 		if (Mtype == 'E')
 		{
-			return &Emission(fd, missionDuration, Tlocation, missionID);
+
+			emission = new Emission(fd, missionDuration, Tlocation, missionID, sig);
 		}
 		else if (Mtype == 'P')
 		{
-			return &Pmission(fd, missionDuration, Tlocation, missionID);
+			
+			pmission = new Pmission(fd, missionDuration, Tlocation, missionID, sig);
+
+			//return //Pmission(fd, missionDuration, Tlocation, missionID);
 		}
 	}
-	FormulationEvent::~FormulationEvent() 
+	Emission* FormulationEvent::getEmission()
 	{
-
+		return emission;
 	}
+
+	Pmission* FormulationEvent::getPmission()
+	{
+		return pmission;
+	}
+
+	char FormulationEvent::gettype()
+	{
+		return Mtype;
+	}
+
+	FormulationEvent::~FormulationEvent()
+	{
+		
+	}
+
+	 
