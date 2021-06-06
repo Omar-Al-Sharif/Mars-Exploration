@@ -11,20 +11,22 @@
 class MarsStation
 {
 private:
-	LinkedQueue<Event*> EventList;
+	LinkedQueue<Event> EventList;
 	LinkedQueue<Mission> PMissionList;
-	PriQ<Emission*> EMissionList;
-	LinkedQueue<ERover*> AvailableERoverList;
-	LinkedQueue<PRover*> AvailablePRoverList;
-	PriQ<Rovers*> In_execution_rover_list;
+	PriQ<Emission> EMissionList;
+	LinkedQueue<ERover> AvailableERoverList;
+	LinkedQueue<PRover> AvailablePRoverList;
+	PriQ<Rovers> In_execution_rover_list;
 	LinkedQueue <Mission> CompletedMissionList;
 	LinkedQueue<ERover> CheckUpEmg;
 	LinkedQueue<PRover> CheckUpPolar;
 	int currentDay; //the day we are in
-	UI userInterface; //
+	UI* userInterface; //
 public:
 	void ExecuteAll();
 	void outputSim();
 	void CallOutputChoice();
 	bool AssignRover();
+	MarsStation();
+
 };
