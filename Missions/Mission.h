@@ -22,7 +22,7 @@ private:
 
 public:
 	Mission();
-	Mission(int fd, int md, int targetloc, int Id);
+	//Mission(int fd, int md, int targetloc, int Id);
 	Mission(int fd, int md, int targetloc, int significance, int Id);
 	//void assigntoRover(Rovers* R);
 	void setWaitingDays();
