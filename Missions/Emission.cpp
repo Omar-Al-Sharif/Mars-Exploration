@@ -3,7 +3,7 @@ Emission::Emission()
 {
 
 }
-Emission::Emission(int fd, int md, int targetloc,int Id) : Mission(fd, md, targetloc,Id)
+Emission::Emission(int fd, int md, int targetloc, int Id, int significance) : Mission(fd, md, targetloc, Id,significance)
 {
 	setPriority();
 }
