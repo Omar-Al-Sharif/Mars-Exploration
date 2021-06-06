@@ -7,12 +7,12 @@
 #include"ERovers.h"
 #include"PRovers.h"
 #include "PriQ.h"
-
+#include "Event.h"
 class MarsStation
 {
 private:
 	LinkedQueue<Event> EventList;
-	LinkedQueue<Mission> PMissionList;
+	LinkedQueue<Pmission> PMissionList;
 	PriQ<Emission> EMissionList;
 	LinkedQueue<ERover> AvailableERoverList;
 	LinkedQueue<PRover> AvailablePRoverList;
@@ -27,6 +27,7 @@ public:
 	void outputSim();
 	void CallOutputChoice();
 	bool AssignRover();
+	void AssignMission(FormulationEvent*p);
 	MarsStation();
 
 };
