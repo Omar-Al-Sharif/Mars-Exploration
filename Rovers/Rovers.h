@@ -16,7 +16,7 @@ protected:
 	Mission* RoverMission;
 
 public:
-	Rovers(int spd, int Checkupdur, int Ncheckup, int Mcomp, Mission* roverMission);
+	Rovers(int spd, int Checkupdur, int Ncheckup, int Mcomp);
 	void setSpeed(int a);
 	void setCheckUpDur(int a);
 	void setMissionComp(int a);
@@ -27,5 +27,5 @@ public:
 	int getSpeed();
 	Mission* getRoverMission();
 	~Rovers();
-	void setRoverMission(Mission a);
+	void setRoverMission(Mission* a);
 };
