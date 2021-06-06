@@ -6,6 +6,6 @@ private:
 
 
 public:
-	Pmission(int fd, int md, int targetloc, int Id);
+	Pmission(int fd, int md, int targetloc, int Id, int signficance);
 	Pmission();
 };
