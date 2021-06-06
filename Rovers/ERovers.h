@@ -6,6 +6,7 @@
 
 class ERover : public Rovers
 {
+private:
 
 public:
 	ERover(int spd, int Checkupdur, int Ncheckup, int Mcomp, Mission* roverMission);
