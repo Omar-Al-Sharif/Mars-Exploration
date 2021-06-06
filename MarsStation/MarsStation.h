@@ -3,6 +3,8 @@
 #include "Event.h"
 #include "UI.h"
 #include "Mission.h"
+#include "EMission.h"
+#include "PMission.h"
 #include "Rovers.h"
 #include"ERovers.h"
 #include"PRovers.h"
