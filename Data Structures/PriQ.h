@@ -1,18 +1,18 @@
 #pragma once
 #include "Emission.h"
-#include "ERovers.h"
+#include "Rovers.h"
 
 //Operator Overloading for both Emissions and Erovers since they are sorted in different ways
 
 bool operator>(const Emission& E1, const Emission& E2)
 {
-	return (E1.Priority > E2.Priority);
+	return (E1.getPriority() > E2.getPriority());
 }
 
-bool operator > (ERover & ER1, ERover& ER2)
+bool operator > (Rovers & R1, Rovers & R2)
 {
-	int CD1 = (ER1.getRoverMission())->getFinishDay();
-	int CD2 = (ER2.getRoverMission())->getFinishDay();
+	int CD1 = (R1.getRoverMission())->getFinishDay();
+	int CD2 = (R2.getRoverMission())->getFinishDay();
 	return (CD1 < CD2); //Notice that I invertedn the > sign because the rovers are sorted ascendingly
 	// unlike the Emissions which are sorted descendingly according to priority
 }
@@ -23,7 +23,7 @@ class PriQ
 	
 private:
 
-	T Data[20];
+	T* Data[20];
 	int Count;
 
 	void ReheapUp(int Index)
@@ -31,7 +31,7 @@ private:
 		int Parent = GetParentIndex(Index);
 		if (Parent >= 0)
 		{
-			if ((Data[Index]) > (Data[Parent]))
+			if (*(Data[Index]) > *(Data[Parent]))
 			{
 				Exchange(Parent, Index);
 				ReheapUp(Parent);
@@ -42,29 +42,10 @@ private:
 
 	void Exchange(int i1, int i2)
 	{
-		T temp = Data[i2];
+		T* temp = Data[i2];
 		Data[i2]=Data[i1];
 		Data[i1]=temp;
 
-	}
-	
-	void HeapSort()
-	{
-		T Max;
-		T temp[20];
-		int tempSize = -1;
-		while (Count != -1)
-		{
-			Max = Data[0];
-			Data[0] = Data[Count--];
-			temp[++tempSize] = Max;
-			ReheapDown(0);
-		}
-		for (int i = 0; i <= tempSize; i++)
-		{
-			Data[i] = temp[i];
-			Count++;
-		}
 	}
 
 	void ReheapDown(int Index)
@@ -74,10 +55,10 @@ private:
 		int Largest = Index;
 
 		if (LeftChild <= Count) //if left subtree exists
-			if ((Data[LeftChild]) > (Data[Largest]))
+			if (*(Data[LeftChild]) > *(Data[Largest]))
 				Largest = LeftChild;
 		if (RightChild <= Count) //if right subtree exists
-			if ((Data[RightChild]) > (Data[Largest]))
+			if (*(Data[RightChild]) > *(Data[Largest]))
 				Largest = RightChild;
 
 		if (Largest != Index)
@@ -110,21 +91,20 @@ public:
 		Count = -1;
 	}
 
-	void enqueue(T Element)
+	void enqueue(T* Element)
 	{
 		Data[++Count] = Element;
 		ReheapUp(Count);
-		HeapSort();
 	}
 
-	bool dequeue(T& Element)
+	bool dequeue(T* Element)
 	{
 		if (!IsEmpty())
 		{
 			Element = Data[0];
-			Data[0] = Data[Count--];
+			Data[0] = Data[Count];
+			Count--;
 			ReheapDown(0);
-			HeapSort();
 			return true;
 		}
 		else
@@ -136,7 +116,7 @@ public:
 		return (Count == -1);
 	}
 
-	bool Peek(T Element) const 
+	bool Peek(T* Element) const 
 	{
 		if (!IsEmpty())
 		{
