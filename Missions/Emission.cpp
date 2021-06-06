@@ -13,7 +13,7 @@ void Emission::setPriority()
 	//write the piroity equation  
 }
 
-int Emission::getPriority()
+int Emission::getPriority() const
 {
 	return Priority;
 }
