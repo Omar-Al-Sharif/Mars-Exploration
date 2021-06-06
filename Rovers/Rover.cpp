@@ -1,14 +1,24 @@
 #include "../Data structure and algorithm/Rovers.h"
 
 
-Rovers::Rovers(int spd, int Checkupdur, int Ncheckup, int Mcomp)
+Rovers::Rovers(int spd, int Checkupdur, int Ncheckup, int Mcomp, Mission* roverMission)
 {
 	speed = spd;
 	checkUpDur = Checkupdur;
 	NeedCheckUP = Ncheckup;
 	MissionComp = Mcomp;
+	roverMission = nullptr;
+}
+void Rovers::setRoverMission(Mission a)
+{
+	RoverMission = &a;
 }
 
+
+Mission* Rovers::getRoverMission()
+{
+	return RoverMission;
+}
 
 void Rovers::setSpeed(int a)
 {
@@ -51,3 +61,4 @@ int Rovers::getNeedCheckUp()
 {
 	return NeedCheckUP;
 }
+
