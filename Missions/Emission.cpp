@@ -1,9 +1,6 @@
 #include "Emission.h"
-Emission::Emission()
-{
 
-}
-Emission::Emission(int fd, int md, int targetloc, int Id, int significance) : Mission(fd, md, targetloc, Id,significance)
+Emission::Emission(int fd, int md, int targetloc, int significance, int Id) : Mission(fd, md, targetloc,significance, Id)
 {
 	setPriority();
 }
