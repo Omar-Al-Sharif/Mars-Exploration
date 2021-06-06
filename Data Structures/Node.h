@@ -4,32 +4,32 @@ template <typename T>
 class Node
 {
 private:
-	T data; // T* item
-	Node* nextNode;
+	T* data; // T* item
+	Node<T>* nextNode;
 public:
 	Node()
 	{
 		nextNode = nullptr;
 	}
-	Node( T newItem) 
+	Node(T* newItem)
 	{
 		data = newItem;
-		nextNode= nullptr;
+		nextNode = nullptr;
 
 	}
-	void setNext(Node <T>* passedNode)  //set the next node in the list
+	void setNext(Node<T>* passedNode)  //set the next node in the list
 	{
-		this -> nextNode = passedNode;
+		nextNode = passedNode;
 	}
-	Node* getNext() //get the next node in the list
+	Node<T>* getNext() //get the next node in the list
 	{
 		return nextNode;
 	}
-	T getItem()  // get the item data in the node
+	T* getItem()  // get the item data in the node
 	{
 		return data;
 	}
-	void setItem(T i)
+	void setItem(T* i)
 	{
 		data = i;
 	}
