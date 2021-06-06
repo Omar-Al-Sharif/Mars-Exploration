@@ -111,6 +111,11 @@ public:
 			return false;
 	}
 
+	void getCount(int& C)
+	{
+		C = Count;
+	}
+
 	bool IsEmpty()
 	{
 		return (Count == -1);
