@@ -12,8 +12,6 @@ LinkedQueue<Event> EventList;
 	LinkedQueue<PRover> CheckUpPolar;
 */
 
-
-
 MarsStation::MarsStation()
 {
 	currentDay = 0;
@@ -26,7 +24,8 @@ void MarsStation::AssignMission(FormulationEvent* p)
 	char type = p->gettype();
 	if (type=='E')
 	{
-	    EMissionList.enqueue((p->getEmission()));
+		Emission* c = p->getEmission();
+		EMissionList.enqueue(c);
 	}
 	else
 	{
@@ -44,8 +43,7 @@ void MarsStation::AssignRover()
 
 void MarsStation::ExecuteAll()
 {
-	while (!EventList.isEmpty() || !EMissionList.IsEmpty() || !PMissionList.isEmpty() || !In_execution_rover_list.IsEmpty() || !CheckUpPolar.isEmpty() || !CheckUpPolar.isEmpty())
-	{
+	
 		Event* temp;
 		EventList.peek(temp);
 		if (temp->getDay() == currentDay)
@@ -72,6 +70,7 @@ void MarsStation::ExecuteAll()
 				Emission* ptrEmission; ERover* PtrErover; PRover* ptrProver;
 				if (!AvailableERoverList.isEmpty())
 				{
+					
 					EMissionList.dequeue(ptrEmission);
 					AvailableERoverList.dequeue(PtrErover);
 					PtrErover->setRoverMission((Mission*)ptrEmission);
@@ -83,7 +82,34 @@ void MarsStation::ExecuteAll()
 
 		}
 
-	}
-	userInterface->ConsoleOutput();//needs modifications for the arguments
+	
+	//userInterface->ConsoleOutput();//needs modifications for the arguments
 	++currentDay;
 }
+
+
+void MarsStation:: CallOutputChoice()
+{
+	userInterface->outputSimulationChoice();
+}
+
+
+
+void MarsStation::outputSim()
+{
+	userInterface->ConsoleOutput(currentDay, PMissionList,EMissionList, AvailableERoverList, AvailablePRoverList, In_execution_rover_list, CheckUpEmg, CheckUpPolar, CompletedMissionList);
+}
+bool MarsStation::programEnded()
+{
+	if (In_execution_rover_list.IsEmpty() && PMissionList.isEmpty() && EMissionList.IsEmpty())
+	{
+		return true;
+	}
+	return false;
+}
+
+void MarsStation::CallOutputFile()
+{
+	userInterface->OutputFile(CompletedMissionList, AvailableERoverList, AvailablePRoverList);
+}
+
