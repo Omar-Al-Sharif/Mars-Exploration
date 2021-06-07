@@ -24,9 +24,9 @@ private:
 public:
 	void inputFile(LinkedQueue<ERover>& , LinkedQueue<PRover>& , LinkedQueue<Event>&);
 	void outputSimulationChoice();
-	void ConsoleOutput(); //outputs based on the choice of program interface
+	//outputs based on the choice of program interface
 	void OutputFile(LinkedQueue<Mission> CompletedMissionList);
-	void ConsoleOutput (int dayMarsStation, LinkedQueue<Pmission> PMissionList, PriQ<Emission> EMissionList, LinkedQueue<ERover> AvailableERoverList, LinkedQueue<PRover> AvailablePRoverList, PriQ<Rovers> In_execution_rover_list, LinkedQueue<ERover> CheckUpEmg, LinkedQueue<PRover> CheckUpPolar, LinkedQueue <Mission> CompletedMissionList)
+	void ConsoleOutput (int dayMarsStation, LinkedQueue<Pmission> PMissionList, PriQ<Emission> EMissionList, LinkedQueue<ERover> AvailableERoverList, LinkedQueue<PRover> AvailablePRoverList, PriQ<Rovers> In_execution_rover_list, LinkedQueue<ERover> CheckUpEmg, LinkedQueue<PRover> CheckUpPolar, LinkedQueue <Mission> CompletedMissionList);
 
 	
 };
