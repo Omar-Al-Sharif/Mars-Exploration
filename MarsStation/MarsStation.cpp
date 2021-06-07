@@ -1,5 +1,37 @@
 #include "MarsStation.h"
 
+/*
+LinkedQueue<Event> EventList;
+	LinkedQueue<Mission> PMissionList;
+	PriQ<Emission> EMissionList;
+	LinkedQueue<ERover> AvailableERoverList;
+	LinkedQueue<PRover> AvailablePRoverList;
+	PriQ<Rovers> In_execution_rover_list;
+	LinkedQueue <Mission> CompletedMissionList;
+	LinkedQueue<ERover> CheckUpEmg;
+	LinkedQueue<PRover> CheckUpPolar;
+*/
+
+void MarsStation::AssignErover(Mission* rovermission, ERover* eRover)
+{
+	eRover->setRoverMission(rovermission);
+	rovermission->setEWD(currentDay, eRover->getSpeed());
+	Rovers* ptrRover;
+	ptrRover = eRover;
+	In_execution_rover_list.enqueue(ptrRover);
+
+}
+
+
+void MarsStation::AssignProver(Mission* rovermission, PRover* pRover)
+{
+	pRover->setRoverMission(rovermission);
+	rovermission->setEWD(currentDay, pRover->getSpeed());
+	Rovers* ptrRover;
+	ptrRover = pRover;
+	In_execution_rover_list.enqueue(ptrRover);
+}
+
 MarsStation::MarsStation()
 {
 	currentDay = 0;
@@ -53,21 +85,47 @@ void MarsStation::ExecuteAll()
 
 		while ((!AvailableERoverList.isEmpty() || !AvailablePRoverList.isEmpty()) && (!EMissionList.IsEmpty() || !PMissionList.isEmpty()))
 		{
+			Emission* ptrEmission; ERover* PtrErover; PRover* ptrProver; Mission* ptrMission; Rovers* ptrRover;
+			Pmission* ptrPmission;
 			if (!EMissionList.IsEmpty())
 			{
-				Emission* ptrEmission; ERover* PtrErover; PRover* ptrProver;
 				if (!AvailableERoverList.isEmpty())
 				{
 					
 					EMissionList.dequeue(ptrEmission);
 					AvailableERoverList.dequeue(PtrErover);
-					PtrErover->setRoverMission((Mission*)ptrEmission);
-
-
+					ptrMission = ptrEmission;
+					AssignErover(ptrMission, PtrErover);
+				}
+				
+				else if (!AvailablePRoverList.isEmpty())
+				{
+					EMissionList.dequeue(ptrEmission);
+					AvailablePRoverList.dequeue(ptrProver);
+					ptrMission = ptrEmission;
+					AssignProver(ptrMission, ptrProver);
 				}
 			}
 
+			else 
+			{
+				if (!AvailableERoverList.isEmpty())
+				{
 
+					PMissionList.dequeue(ptrPmission);
+					AvailableERoverList.dequeue(PtrErover);
+					ptrMission = ptrPmission;
+					AssignErover(ptrMission, PtrErover);
+				}
+
+				else if (!AvailablePRoverList.isEmpty())
+				{
+					PMissionList.dequeue(ptrPmission);
+					AvailablePRoverList.dequeue(ptrProver);
+					ptrMission = ptrPmission;
+					AssignProver(ptrMission, ptrProver);
+				}
+			}
 		}
 
 	
@@ -109,13 +167,13 @@ void MarsStation::EnqueueCheckUpLists(Rovers* Just_Finished_Rover)
 		Rovers* Type = dynamic_cast<ERover*>(Just_Finished_Rover);
 		if (Type)
 		{
-			ERover* E = (ERover*) Type;
+			ERover* E = (ERover*)Type;
 			CheckUpEmg.enqueue(E);
 			E->setFinishCheckUp(currentDay);
 		}
 		else
 		{
-			PRover* P = (PRover*) Type;
+			PRover* P = (PRover*)Type;
 			CheckUpPolar.enqueue(P);
 			P->setFinishCheckUp(currentDay);
 		}
@@ -129,7 +187,7 @@ void MarsStation::DequeueCheckUpLists()
 	PRover* P;
 	CheckUpEmg.peek(E);
 	CheckUpPolar.peek(P);
-	while (E->getFinishCheckup()==currentDay)
+	while (E->getFinishCheckup() == currentDay)
 	{
 		CheckUpEmg.dequeue(E);
 		AvailableERoverList.enqueue(E);
