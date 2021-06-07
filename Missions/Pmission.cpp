@@ -1,12 +1,8 @@
 #pragma once
-#include "Pmission.h"
+#include "PMission.h"
 #include "Mission.h"
-Pmission::Pmission(int fd, int md, int targetloc, int significance, int Id) : Mission(fd, md, targetloc, significance, Id)
+Pmission::Pmission(int fd, int md, int targetloc, int Id, int signficance) : Mission(fd, md, targetloc, Id, signficance)
 {
 	
 }
 
-Pmission::Pmission()
-{
-
-}
