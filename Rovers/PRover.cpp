@@ -7,6 +7,6 @@
 class PRover : public Rovers
 {
 public :
-	PRover(int spd, int Checkupdur, int Ncheckup, int Mcomp, Mission* roverMission);
+	PRover(int spd, int Checkupdur, int Ncheckup, int Mcomp);
 	bool isAssigned();
 };
