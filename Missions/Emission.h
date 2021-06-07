@@ -7,7 +7,6 @@ private:
 	double Priority;
 
 public:
-	Emission();
 	Emission(int fd, int md, int targetloc, int Id,int significance);
 	void setPriority();
 	int getPriority() const;
