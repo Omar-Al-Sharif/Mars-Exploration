@@ -8,10 +8,21 @@ using namespace std;
 #include <windows.h>
 #include "MarsStation.h"
 #include "FormulationEvent.h"
-#include "CancelEvent.h"
-#include "PromotionEvent.h"
-
-class MarsStation;
+#include "ERovers.h"
+#include "Rovers.h"
+#include "PRovers.h"
+#include "Mission.h"
+#include "Emission.h"
+#include "Queue.h"
+#include "PriQ.h"
+//#include "CancelEvent.h"
+//#include "PromotionEvent.h"
+/*class MarsStation;
+class Rovers;
+class PRover;
+class ERover;
+class Mission;
+class Emission;*/
 
 class UI
 {
@@ -22,16 +33,16 @@ private:
 	void EnterPressed() const; // UTILITY FUNCTION
 	//void ConsoleOutputUtility();
 public:
-	void inputFile(LinkedQueue<ERover>& , LinkedQueue<PRover>& , LinkedQueue<Event>&);
+	void inputFile(LinkedQueue<ERover>&, LinkedQueue<PRover>&, LinkedQueue<Event>&);
 	void outputSimulationChoice();
 	//outputs based on the choice of program interface
-	void OutputFile(LinkedQueue<Mission> CompletedMissionList);
-	void ConsoleOutput (int dayMarsStation, LinkedQueue<Pmission> PMissionList, PriQ<Emission> EMissionList, LinkedQueue<ERover> AvailableERoverList, LinkedQueue<PRover> AvailablePRoverList, PriQ<Rovers> In_execution_rover_list, LinkedQueue<ERover> CheckUpEmg, LinkedQueue<PRover> CheckUpPolar, LinkedQueue <Mission> CompletedMissionList);
-
+	void OutputFile(LinkedQueue<Mission> CompletedMissionList, LinkedQueue<ERover> AvailableER, LinkedQueue<PRover> AvailablePR);
+	void ConsoleOutput(int dayMarsStation, LinkedQueue<Pmission> PMissionList, PriQ<Emission> EMissionList, LinkedQueue<ERover> AvailableERoverList, LinkedQueue<PRover> AvailablePRoverList, PriQ<Rovers> In_execution_rover_list, LinkedQueue<ERover> CheckUpEmg, LinkedQueue<PRover> CheckUpPolar, LinkedQueue <Mission> CompletedMissionList);
 	
+
 };
 
-void UI::inputFile(LinkedQueue<ERover> &AvailableERoverList, LinkedQueue<PRover> &AvailablePRoverList, LinkedQueue<Event> &EventList)
+void UI::inputFile(LinkedQueue<ERover>& AvailableERoverList, LinkedQueue<PRover>& AvailablePRoverList, LinkedQueue<Event>& EventList)
 {
 	input.open("inputFile.txt");
 
@@ -40,6 +51,16 @@ void UI::inputFile(LinkedQueue<ERover> &AvailableERoverList, LinkedQueue<PRover>
 		cerr << "Error!! Opening file" << endl;
 		exit(1);
 	}
+
+	//Main->Marstation->UI
+	/*
+	Main: Marsstation.Execute
+	Execute: 
+	{
+	UI.Input(AvailableRovers, )
+	}
+	
+	*/
 
 	//int MRN; // Mountainous rovers number
 	int PRN; // Polar Rovers number
@@ -68,20 +89,20 @@ void UI::inputFile(LinkedQueue<ERover> &AvailableERoverList, LinkedQueue<PRover>
 	// setting static data member
 	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 	//int SM; //mountainous Rover Speed
-	
+
 	//int CM; //checkup mountainous duration
-	
+
 	//int AutoP;
 	int numberEvents; //number of events
-	
+
 	//input >> AutoP;
 	input >> numberEvents;
 	char eventType;
 	char missionType;
 	int fd, ID, TLOC, MDUR, SIG;
-	
+
 	// Creating an event list
-	
+
 
 	while (!input.eof())
 	{
@@ -117,7 +138,7 @@ void UI::outputSimulationChoice() //chooses the type of simulation from choice
 	cout << "3- Silent Mode" << endl;
 	int choiceN;
 	cin >> choiceN;
-	while (!(choiceN >= 1 && choiceN <=3))
+	while (!(choiceN >= 1 && choiceN <= 3))
 	{
 		cout << "Error! The choice you entered is not within range." << endl;
 		cout << "Enter again:";
@@ -143,7 +164,7 @@ void UI::outputSimulationChoice() //chooses the type of simulation from choice
 * ;
 	LinkedQueue<ERover> AvailableERoverList;
 	LinkedQueue<PRover> AvailablePRoverList;
-	
+
 	LinkedQueue <Mission> CompletedMissionList;
 	LinkedQueue<ERover> CheckUpEmg;
 	LinkedQueue<PRover> CheckUpPolar;
@@ -159,7 +180,8 @@ void UI::EnterPressed() const
 	}
 }
 
-void UI::ConsoleOutput(int dayMarsStation, LinkedQueue<Pmission> PMissionList,PriQ<Emission> EMissionList,LinkedQueue<ERover> AvailableERoverList,LinkedQueue<PRover> AvailablePRoverList, PriQ<Rovers> In_execution_rover_list, LinkedQueue<ERover> CheckUpEmg, LinkedQueue<PRover> CheckUpPolar, LinkedQueue <Mission> CompletedMissionList) //needs day,mission list(s),rover list(s)
+
+void UI::ConsoleOutput(int dayMarsStation, LinkedQueue<Pmission> PMissionList, PriQ<Emission> EMissionList, LinkedQueue<ERover> AvailableERoverList, LinkedQueue<PRover> AvailablePRoverList, PriQ<Rovers> In_execution_rover_list, LinkedQueue<ERover> CheckUpEmg, LinkedQueue<PRover> CheckUpPolar, LinkedQueue <Mission> CompletedMissionList) //needs day,mission list(s),rover list(s)
 {
 	int countP, countE;
 	PMissionList.getCount(countP);
@@ -201,19 +223,42 @@ void UI::ConsoleOutput(int dayMarsStation, LinkedQueue<Pmission> PMissionList,Pr
 	In_execution_rover_list.getCount(countR);
 	cout << countR << " " << "In-Execution Missions/Rovers: [";
 	ERover* tempERover;
-	In_execution_rover_list.dequeue(tempERover);
-	cout << tempERover->getRoverMission()->getMissionId() << "/" << tempERover->getId();
-	while (In_execution_rover_list.dequeue(tempERover))
+	PRover* tempPRover;
+	Rovers* tempR;
+	In_execution_rover_list.dequeue(tempR);
+	LinkedQueue<ERover> sublist1;
+	LinkedQueue<PRover> sublist2;
+	tempERover = dynamic_cast<ERover*>(tempR);
+	if (tempERover)
+	{
+		sublist1.enqueue(tempERover);
+	}
+	else
+	{
+
+		tempPRover = dynamic_cast<PRover*>(tempR);
+		if (tempPRover)
+		{
+			sublist2.enqueue(tempPRover);
+		}
+	}
+	sublist1.dequeue(tempERover);
+	int number = tempERover->getRoverMission()->getMissionId();
+	cout << number << "/" << tempERover->getId();;
+	while (sublist1.dequeue(tempERover))
 	{
 		cout << ", " << tempERover->getRoverMission()->getMissionId() << "/" << tempERover->getId();
 	}
 	cout << "] (";
-
-	PRover* tempPRover;
-	while (In_execution_rover_list.dequeue(tempPRover))
+	sublist2.dequeue(tempPRover);
+	number = tempPRover->getRoverMission()->getMissionId();
+	cout << number << "/" << tempPRover->getId();
+	while (In_execution_rover_list.dequeue(tempR))
 	{
-		cout << ', ' << tempPRover->getRoverMission()->getMissionId() << tempPRover->getId();
+		cout << ", " << tempPRover->getRoverMission()->getMissionId() << "/" << tempPRover->getId();
 	}
+
+
 	cout << ")" << endl;
 	////////////////////// END OF THE SECOND LINE ///////////////////////////////
 	//EnterPressed();
@@ -298,7 +343,7 @@ void UI::ConsoleOutput(int dayMarsStation, LinkedQueue<Pmission> PMissionList,Pr
 	cout << tempEMission->getMissionId();
 	while (E.dequeue(tempEMission))
 	{
-		cout<<","<<tempEMission->getMissionId();
+		cout << "," << tempEMission->getMissionId();
 	}
 	cout << "] (";
 	P.dequeue(tempPMission);
@@ -310,7 +355,7 @@ void UI::ConsoleOutput(int dayMarsStation, LinkedQueue<Pmission> PMissionList,Pr
 	}
 	cout << ")";
 	cout << endl;
-	cout << "--------------------------------------------------------"<<endl;
+	cout << "--------------------------------------------------------" << endl;
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	if (choice == 1)
 	{
@@ -327,15 +372,19 @@ void UI::ConsoleOutput(int dayMarsStation, LinkedQueue<Pmission> PMissionList,Pr
 
 	}
 }
-
-void UI::OutputFile(LinkedQueue<Mission> CompletedMissionList)
+//void OutputFile(LinkedQueue<Mission> CompletedMissionList, LinkedQueue<ERover> AvailableER, LinkedQueue<PRover> AvailablePR);
+void UI::OutputFile(LinkedQueue<Mission> CompletedMissionList,LinkedQueue<ERover> AvailableER,LinkedQueue<PRover> AvailablePR)
 {
+	out.open("outputFile.txt");
 	out << "CD" << "/t" << "ID" << "/t" << "FD" << "/t" << "WD" << "/t" << "ED" << endl;
 	Mission* toPrint;
 	Emission* E;
 	Pmission* P;
-	int sumWaitingDays, sumExecutionDays = 0;
-	int Ecount, Pcount, TotalCount = 0;
+	int sumWaitingDays = 0;
+	int sumExecutionDays = 0;
+	int Ecount = 0;
+	int Pcount = 0;
+	int TotalCount = 0;
 	while (CompletedMissionList.dequeue(toPrint))
 	{
 		E = dynamic_cast<Emission*> (toPrint);
@@ -358,9 +407,11 @@ void UI::OutputFile(LinkedQueue<Mission> CompletedMissionList)
 		TotalCount++;
 	}
 	out << "Missions: " << toPrint->getNumberOfmissions() << " [P: ";
-	out << Pcount << ", " << "E: " << Ecount<<"]"<<endl;
+	out << Pcount << ", " << "E: " << Ecount << "]" << endl;
 	out << "Rovers: ";
 	double AvgW = sumWaitingDays / TotalCount;
 	double AvgE = sumExecutionDays / TotalCount;
 	out << "Avg Wait = " << AvgW << ", Avg Exec = " << AvgE;
+	out.close();
+	cout << "Simulation end, Output file created"<<endl;
 }
