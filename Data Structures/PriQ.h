@@ -9,7 +9,7 @@ bool operator>(const Emission& E1, const Emission& E2)
 	return (E1.getPriority() > E2.getPriority());
 }
 
-bool operator > (Rovers & R1, Rovers & R2)
+bool operator > (Rovers& R1, Rovers& R2)
 {
 	int CD1 = (R1.getRoverMission())->getFinishDay();
 	int CD2 = (R2.getRoverMission())->getFinishDay();
@@ -20,7 +20,7 @@ bool operator > (Rovers & R1, Rovers & R2)
 template <class T>
 class PriQ
 {
-	
+
 private:
 
 	T* Data[20];
@@ -31,7 +31,7 @@ private:
 		int Parent = GetParentIndex(Index);
 		if (Parent >= 0)
 		{
-			if (*(Data[Index]) > *(Data[Parent]))
+			if (*(Data[Index]) > * (Data[Parent]))
 			{
 				Exchange(Parent, Index);
 				ReheapUp(Parent);
@@ -43,8 +43,8 @@ private:
 	void Exchange(int i1, int i2)
 	{
 		T* temp = Data[i2];
-		Data[i2]=Data[i1];
-		Data[i1]=temp;
+		Data[i2] = Data[i1];
+		Data[i1] = temp;
 
 	}
 
@@ -55,10 +55,10 @@ private:
 		int Largest = Index;
 
 		if (LeftChild <= Count) //if left subtree exists
-			if (*(Data[LeftChild]) > *(Data[Largest]))
+			if (*(Data[LeftChild]) > * (Data[Largest]))
 				Largest = LeftChild;
 		if (RightChild <= Count) //if right subtree exists
-			if (*(Data[RightChild]) > *(Data[Largest]))
+			if (*(Data[RightChild]) > * (Data[Largest]))
 				Largest = RightChild;
 
 		if (Largest != Index)
@@ -73,7 +73,7 @@ private:
 	{
 		return ((2 * parent) + 1);
 	}
-	
+
 	int GetRightChildIndex(int parent)
 	{
 		return ((2 * parent) + 2);
@@ -81,7 +81,7 @@ private:
 
 	int GetParentIndex(int child)
 	{
-		return ( (child - 1) / 2);
+		return ((child - 1) / 2);
 	}
 
 public:
@@ -91,13 +91,13 @@ public:
 		Count = -1;
 	}
 
-	void enqueue(T* Element)
+	void enqueue(T*& Element)
 	{
 		Data[++Count] = Element;
 		ReheapUp(Count);
 	}
 
-	bool dequeue(T* Element)
+	bool dequeue(T*& Element)
 	{
 		if (!IsEmpty())
 		{
@@ -121,7 +121,7 @@ public:
 		return (Count == -1);
 	}
 
-	bool Peek(T* Element) const 
+	bool Peek(T*& Element) const
 	{
 		if (!IsEmpty())
 		{
@@ -130,5 +130,5 @@ public:
 		}
 		return false;
 	}
-	
+
 };
