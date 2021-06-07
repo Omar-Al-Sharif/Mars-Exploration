@@ -11,9 +11,9 @@ private:
 public:
 	LinkedQueue();
 	bool isEmpty() const;
-	bool enqueue(T* newEntry);
+	bool enqueue(T*& newEntry);
 	bool dequeue(T*& frntEntry);
-	bool peek(T* frntEntry)  const;
+	bool peek(T*& frntEntry)  const;
 	void getCount(int& C);
 	void print() const;
 	~LinkedQueue();
@@ -58,7 +58,7 @@ Input: newEntry .
 Output: True if the operation is successful; otherwise false.
 */
 template <typename T>
-bool LinkedQueue<T>::enqueue(T* newEntry)
+bool LinkedQueue<T>::enqueue(T*& newEntry)
 {
 	Node<T>* newNodePtr = new Node<T>(newEntry);
 	// Insert the new node
@@ -104,7 +104,7 @@ Input: None.
 Output: The front of the queue.
 */
 template <typename T>
-bool LinkedQueue<T>::peek(T* frntEntry) const
+bool LinkedQueue<T>::peek(T*& frntEntry) const
 {
 	if (isEmpty())
 		return false;
@@ -157,6 +157,6 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue<T>& LQ)
 		backPtr = ptr;
 		NodePtr = NodePtr->getNext();
 	}
-	
+
 }
 
