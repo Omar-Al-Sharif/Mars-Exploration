@@ -35,6 +35,8 @@ public:
 	void outputSim();
 	void CallOutputChoice(); // Chooose
 	void CallOutputFile(); // calls the output file in the end
+	void EnqueueCheckUpLists(Rovers* AssignedRover);
+	void DequeueCheckUpLists();
 
 };
 
