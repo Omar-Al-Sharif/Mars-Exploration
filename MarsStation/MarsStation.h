@@ -3,13 +3,13 @@
 #include "Event.h"
 #include "UI.h"
 #include "Mission.h"
-#include "EMission.h"
-#include "PMission.h"
 #include "Rovers.h"
 #include"ERovers.h"
 #include"PRovers.h"
 #include "PriQ.h"
 #include "Event.h"
+
+
 class MarsStation
 {
 private:
@@ -28,8 +28,13 @@ public:
 	void ExecuteAll();
 	void outputSim();
 	void CallOutputChoice();
-	bool AssignRover();
+	void  AssignRover();
 	void AssignMission(FormulationEvent*p);
 	MarsStation();
+	bool programEnded(); //check if program ended
+	void outputSim();
+	void CallOutputChoice(); // Chooose
+	void CallOutputFile(); // calls the output file in the end
 
 };
+
