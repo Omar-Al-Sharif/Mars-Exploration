@@ -4,70 +4,37 @@
 Mission::Mission(int fd, int md, int targetloc, int significance, int Id)
 {
 	FD = fd;
+	SWD = fd;
 	MD = md;
 	targetlocation = targetloc;
 	Significance = significance;
 	numberOfmissions++;
 	missionID = Id;
 	Assigned = false;
+	
 }
-//
-//Mission::Mission(int fd, int md, int targetloc, int Id)
-//{
-//	FD = fd;
-//	MD = md;
-//	targetlocation = targetloc;
-//	numberOfmissions++;
-//	missionID = Id;
-//	Assigned = false;
-//}
-
-
 
 /////////////////////////////////////////////////////////////
 
 int Mission::numberOfmissions = 0; // static data member initialization
 
 //////////////////////////////////////////////////////////
-Mission::Mission()
-{
 
-}
 
-void Mission::setAssigned(bool t)
-{
-	Assigned = t;
-}
 
 bool Mission::getAssigned()
 {
 	return Assigned;
 }
 
-void Mission::setWaitingDays()
+void Mission::setEWD(int CurrentDay, int Speed)
 {
+	EWD = CurrentDay;
 	WD = EWD - SWD;
-}
-
-
-//void Mission::assigntoRover(Rovers* R)
-//{
-//	this->R = R;
-//	int speed = R->getSpeed();
-//	ED = 2 * (targetlocation * speed) / 25 + MD;
-//	CD = WD + ED;  //Completion day is the summation of waiting days + execution days 
-//	// Because execution day aleady includes the mission duration 
-//}
-
-void Mission::setSWD(int x)
-{
-	SWD = x;
-}
-
-
-void Mission::setEWD(int y)
-{
-	EWD = y;
+	Assigned = true;
+	ED = 2 * (targetlocation * Speed) / 25 + MD;
+	CD = WD + ED;
+	CD = FD + WD + ED;
 }
 
 int Mission::getEWD()
@@ -100,4 +67,24 @@ int Mission::getWaitingDays() const
 int Mission::getExecutionDays() const
 {
 	return ED;
+}
+
+int Mission::getTargetLoc() const
+{
+	return targetlocation;
+}
+
+int Mission::getSignificance() const
+{
+	return Significance;
+}
+
+int Mission::getMissionDuration() const
+{
+	return MD;
+}
+
+int Mission::getNumberOfmissions()
+{
+	return numberOfmissions;
 }
