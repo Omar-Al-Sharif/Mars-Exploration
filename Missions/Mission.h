@@ -29,7 +29,7 @@ public:
 	int getEWD();
 	int getFinishDay() const;
 	static int getNumberOfmissions();
-	int getFormulationDay() const;
+	virtual int getFormulationDay() const;
 	int getMissionId() const;
 	int getWaitingDays() const;
 	int getExecutionDays() const;
