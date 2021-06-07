@@ -13,13 +13,14 @@ protected:
 	int NeedCheckUP; // after how many missions I need to complete to make a checkup
 	int  MissionComp; //number of missions completed by the rover, we need it to know it for checkup
 	int FinishCheckUp;
-
+	static int incrementID;
+	int RoverID;
 	Mission* RoverMission;
 
 public:
 	Rovers(int spd, int Checkupdur, int Ncheckup);
 	void setSpeed(int a);
-	void IncrementMissionsComp();
+	virtual void IncrementMissionsComp();
 	void setNeedCheckUp(int a);
 	int getMissionComp();
 	int getNeedCheckUp();
@@ -32,4 +33,6 @@ public:
 	void setFinishCheckUp(int CurrentDay);
 	int getFinishCheckup();
 	bool NeedsCheckUp();
+	void setRoverID(int);
+	int getId();
 };
