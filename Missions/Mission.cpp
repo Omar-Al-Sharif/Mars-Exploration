@@ -20,7 +20,15 @@ int Mission::numberOfmissions = 0; // static data member initialization
 
 //////////////////////////////////////////////////////////
 
+char Mission::getMissionType()
+{
+	return missionType;
+}
 
+void Mission::setMissionType(char s)
+{
+	missionType = s;
+}
 
 bool Mission::getAssigned()
 {
