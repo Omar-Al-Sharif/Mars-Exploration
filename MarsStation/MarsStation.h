@@ -26,8 +26,6 @@ private:
 	UI* userInterface; //
 public:
 	void ExecuteAll();
-	void outputSim();
-	void CallOutputChoice();
 	void  AssignRover();
 	void AssignMission(FormulationEvent*p);
 	MarsStation();
@@ -37,6 +35,7 @@ public:
 	void CallOutputFile(); // calls the output file in the end
 	void EnqueueCheckUpLists(Rovers* AssignedRover);
 	void DequeueCheckUpLists();
-
+	void AssignErover(Mission* rovermission, ERover* eRover);
+	void AssignProver(Mission* rovermission, PRover* pRover);
 };
 
