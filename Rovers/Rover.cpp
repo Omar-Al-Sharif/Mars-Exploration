@@ -6,7 +6,16 @@ Rovers::Rovers(int spd, int Checkupdur, int Ncheckup)
 	speed = spd;
 	checkUpDur = Checkupdur;
 	NeedCheckUP = Ncheckup;
+	incrementID++;
+	setRoverID(incrementID);
 	MissionComp = 0;
+}
+
+int Rovers:: incrementID = 0;
+// 5 4 
+void Rovers::setRoverID(int i)
+{
+	RoverID = i;
 }
 
 void Rovers::setRoverMission(Mission* a)
@@ -83,4 +92,9 @@ bool Rovers::NeedsCheckUp()
 	if (MissionComp != 0)
 		return(MissionComp % NeedCheckUP == 0);
 	return false;
+}
+
+int Rovers:: getId()
+{
+	return RoverID;
 }
