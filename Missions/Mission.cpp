@@ -11,7 +11,7 @@ Mission::Mission(int fd, int md, int targetloc, int significance, int Id)
 	numberOfmissions++;
 	missionID = Id;
 	Assigned = false;
-	
+
 }
 
 /////////////////////////////////////////////////////////////
@@ -26,6 +26,8 @@ bool Mission::getAssigned()
 {
 	return Assigned;
 }
+
+// setEWD is resposible for calculating most data members of mission
 
 void Mission::setEWD(int CurrentDay, int Speed)
 {
