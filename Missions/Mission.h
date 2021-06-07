@@ -2,7 +2,7 @@
 #include "Rovers.h"
 class Mission
 {
-private:
+protected:
 	int FD; //Formulation day of the mission
 	int MD; //Mission Duration
 	int ED; //Execution Days: The amount of days in execution for the mission 
@@ -35,4 +35,6 @@ public:
 	int getExecutionDays() const;
 	int getTargetLoc() const;
 	int getSignificance() const;
+	char getMissionType();
+	void  setMissionType(char s);
 };
