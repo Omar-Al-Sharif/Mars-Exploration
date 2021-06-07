@@ -22,15 +22,13 @@ private:
 
 public:
 	Mission();
-	//Mission(int fd, int md, int targetloc, int Id);
 	Mission(int fd, int md, int targetloc, int significance, int Id);
-	//void assigntoRover(Rovers* R);
 	void setWaitingDays();
 	void setAssigned(bool t);
 	bool getAssigned();
 
-	void setSWD(int x);
-	void setEWD(int y);
+	int getMissionDuration() const;
+	void setEWD(int CurrentDay, int Speed);
 	int getSWD();
 	int getEWD();
 	int getFinishDay() const;
@@ -39,4 +37,6 @@ public:
 	int getMissionId() const;
 	int getWaitingDays() const;
 	int getExecutionDays() const;
+	int getTargetLoc() const;
+	int getSignificance() const;
 };
