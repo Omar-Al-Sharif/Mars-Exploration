@@ -1,17 +1,5 @@
 #include "MarsStation.h"
 
-/*
-LinkedQueue<Event> EventList;
-	LinkedQueue<Mission> PMissionList;
-	PriQ<Emission> EMissionList;
-	LinkedQueue<ERover> AvailableERoverList;
-	LinkedQueue<PRover> AvailablePRoverList;
-	PriQ<Rovers> In_execution_rover_list;
-	LinkedQueue <Mission> CompletedMissionList;
-	LinkedQueue<ERover> CheckUpEmg;
-	LinkedQueue<PRover> CheckUpPolar;
-*/
-
 MarsStation::MarsStation()
 {
 	currentDay = 0;
@@ -113,3 +101,45 @@ void MarsStation::CallOutputFile()
 	userInterface->OutputFile(CompletedMissionList, AvailableERoverList, AvailablePRoverList);
 }
 
+void MarsStation::EnqueueCheckUpLists(Rovers* Just_Finished_Rover)
+{
+	Just_Finished_Rover->IncrementMissionsComp();
+	if (Just_Finished_Rover->NeedsCheckUp())
+	{
+		Rovers* Type = dynamic_cast<ERover*>(Just_Finished_Rover);
+		if (Type)
+		{
+			ERover* E = (ERover*) Type;
+			CheckUpEmg.enqueue(E);
+			E->setFinishCheckUp(currentDay);
+		}
+		else
+		{
+			PRover* P = (PRover*) Type;
+			CheckUpPolar.enqueue(P);
+			P->setFinishCheckUp(currentDay);
+		}
+	}
+
+}
+
+void MarsStation::DequeueCheckUpLists()
+{
+	ERover* E;
+	PRover* P;
+	CheckUpEmg.peek(E);
+	CheckUpPolar.peek(P);
+	while (E->getFinishCheckup()==currentDay)
+	{
+		CheckUpEmg.dequeue(E);
+		AvailableERoverList.enqueue(E);
+		CheckUpEmg.peek(E);
+	}
+
+	while (P->getFinishCheckup() == currentDay)
+	{
+		CheckUpPolar.dequeue(P);
+		AvailablePRoverList.enqueue(P);
+		CheckUpPolar.peek(P);
+	}
+}
