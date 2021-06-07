@@ -8,5 +8,4 @@ class PRover : public Rovers
 {
 public:
 	PRover(int spd, int Checkupdur, int Ncheckup);
-	bool isAssigned();
 };
