@@ -21,18 +21,14 @@ private:
 	static int numberOfmissions;
 
 public:
-	Mission();
 	Mission(int fd, int md, int targetloc, int significance, int Id);
-	void setWaitingDays();
-	void setAssigned(bool t);
 	bool getAssigned();
-
 	int getMissionDuration() const;
 	void setEWD(int CurrentDay, int Speed);
 	int getSWD();
 	int getEWD();
 	int getFinishDay() const;
-	int getNumberOfmissions() const;
+	static int getNumberOfmissions();
 	int getFormulationDay() const;
 	int getMissionId() const;
 	int getWaitingDays() const;
