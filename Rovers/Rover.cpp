@@ -11,7 +11,7 @@ Rovers::Rovers(int spd, int Checkupdur, int Ncheckup)
 	MissionComp = 0;
 }
 
-int Rovers:: incrementID = 0;
+int Rovers::incrementID = 0;
 // 5 4 
 void Rovers::setRoverID(int i)
 {
@@ -94,7 +94,7 @@ bool Rovers::NeedsCheckUp()
 	return false;
 }
 
-int Rovers:: getId()
+int Rovers::getId()
 {
 	return RoverID;
 }
