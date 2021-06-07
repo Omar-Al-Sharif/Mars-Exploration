@@ -21,20 +21,24 @@ MarsStation::MarsStation()
 
 void MarsStation::AssignMission(FormulationEvent* p)
 {
-	p->Execute(currentDay);
+	p->Execute(currentDay); //note that setting the starting of waiting days is done here automatically when creating mission
 	bool b;
 	char type = p->gettype();
 	if (type=='E')
 	{
 	    EMissionList.enqueue((p->getEmission()));
-		p->getEmission()->setSWD(currentDay);
 	}
 	else
 	{
 		Pmission* g = p->getPmission();
 		b= PMissionList.enqueue(g);
-		p->getEmission()->setSWD(currentDay);
 	}
+}
+
+
+void MarsStation::AssignRover()
+{
+
 }
 
 
@@ -61,9 +65,20 @@ void MarsStation::ExecuteAll()
 			
 		}
 
-		while (!EMissionList.IsEmpty() && !(AvailableERoverList.isEmpty() || (AvailablePRoverList.isEmpty())))
+		while ((!AvailableERoverList.isEmpty() || !AvailablePRoverList.isEmpty()) && (!EMissionList.IsEmpty() || !PMissionList.isEmpty()))
 		{
-			
+			if (!EMissionList.IsEmpty())
+			{
+				Emission* ptrEmission; ERover* PtrErover; PRover* ptrProver;
+				if (!AvailableERoverList.isEmpty())
+				{
+					EMissionList.dequeue(ptrEmission);
+					AvailableERoverList.dequeue(PtrErover);
+					PtrErover->setRoverMission((Mission*)ptrEmission);
+
+
+				}
+			}
 
 
 		}
